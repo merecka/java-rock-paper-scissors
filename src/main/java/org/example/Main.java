@@ -7,7 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int min = 1;
         int max = 3;
-        boolean keepPlaying = false;
+        boolean keepPlaying;
 
         do {
             int rounds;
@@ -39,38 +39,27 @@ public class Main {
                 int computerSelection = (int) (min + Math.random() * max);
                 System.out.println("Computer selection is: " + computerSelection);
 
-
-                if (userSelection == 1) {  // User chooses Rock
-                    if (computerSelection == userSelection) {
-                        ties++;
-                        System.out.println("Result was a tie.");
-                    } else if (computerSelection == 2) {  // CPU chooses Paper
+                if (computerSelection == userSelection) {
+                    ties++;
+                    System.out.println("Result was a tie.");
+                } else if (userSelection == 1) {  // User chooses Rock
+                    if (computerSelection == 2) {  // CPU chooses Paper
                         cpuWins++;
                         System.out.println("Computer wins.");
-                    } else if (computerSelection == 3) {  // CPU chooses Scissors
+                    } else {  // CPU chooses Scissors
                         userWins++;
                         System.out.println("You win!");
                     }
-                }
-
-                if (userSelection == 2) {  // User chooses Paper
-                    if (computerSelection == userSelection) {
-                        ties++;
-                        System.out.println("Result was a tie.");
-                    } else if (computerSelection == 3) {  //CPU chooses Scissors
+                } else if (userSelection == 2) {  // User chooses Paper
+                    if (computerSelection == 3) {  //CPU chooses Scissors
                         cpuWins++;
                         System.out.println("Computer wins.");
                     } else if (computerSelection == 1) {  // CPU chooses Rock
                         userWins++;
                         System.out.println("You win!");
                     }
-                }
-
-                if (userSelection == 3) {  // User chooses Scissors
-                    if (computerSelection == userSelection) {
-                        ties++;
-                        System.out.println("Result was a tie.");
-                    } else if (computerSelection == 1) {  // CPU chooses Rock
+                } else {  // User chooses Scissors
+                    if (computerSelection == 1) {  // CPU chooses Rock
                         cpuWins++;
                         System.out.println("Computer wins.");
                     } else if (computerSelection == 2) {  // CPU chooses Paper
@@ -81,7 +70,7 @@ public class Main {
             }
 
             // End of game
-            System.out.println("Ties: " + ties + ", Your Wins: " + userWins + ", Computer Wins: " + cpuWins );
+            System.out.println("Ties: " + ties + ", Your Wins: " + userWins + ", Computer Wins: " + cpuWins);
             if (userWins > cpuWins) {
                 System.out.println("You are the overall winner!");
             } else {
@@ -92,21 +81,18 @@ public class Main {
             System.out.println("Would you like to play again?  Enter 'Y' or 'N' ");
             String decision = scanner.next();
 
-            if (decision.toLowerCase().equals("y")) {
+            if (decision.equalsIgnoreCase("y")) {
                 keepPlaying = true;
             } else {
                 System.out.println("Thanks for playing!");
                 keepPlaying = false;
             }
         } while (keepPlaying);
-
-
     }
+
     public static int userSelect() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose:  Rock = 1, Paper = 2, Scissors = 3");
-        int userSelection = scanner.nextInt();
-        return userSelection;
-
+        return scanner.nextInt();
     }
 }
